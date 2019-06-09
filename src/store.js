@@ -8,15 +8,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    recipes: [],
+    // bhag: [],
     apiUrl: "https://api.edamam.com/search",
     user: null,
     isAuthenticated: false,
-    userRecipes: []
+    userBHAG: []
   },
   mutations: {
-    setRecipes(state, payload) {
-      state.recipes = payload;
+    setBHAG(state, payload) {
+      state.bhag = payload;
     },
     setUser(state, payload) {
       state.user = payload;
@@ -24,27 +24,11 @@ export default new Vuex.Store({
     setIsAuthenticated(state, payload) {
       state.isAuthenticated = payload;
     },
-    setUserRecipes(state, payload) {
-      state.userRecipes = payload;
+    setUserBHAG(state, payload) {
+      state.userBHAG = payload;
     }
   },
   actions: {
-    async getRecipes({ state, commit }, plan) {
-      try {
-        let response = await axios.get(`${state.apiUrl}`, {
-          params: {
-            q: plan,
-            app_id: "0fe05e11",
-            app_key: "755364cab054b28a505398b1d06e8dd5",
-            from: 0,
-            to: 9
-          }
-        });
-        commit("setRecipes", response.data.hits);
-      } catch (error) {
-        commit("setRecipes", [error]);
-      }
-    },
     userJoin({ commit }, { email, password }) {
       firebase
         .auth()
@@ -88,19 +72,21 @@ export default new Vuex.Store({
           router.push("/");
         });
     },
-    addRecipe({ state }, payload) {
+    addBHAG({ state }, payload) {
+      console.log(state.user.user.uid);
+      console.log("end test");
       firebase
         .database()
         .ref("users")
         .child(state.user.user.uid)
-        .push(payload.recipe.label);
+        .push(payload);
     },
-    getUserRecipes({ state, commit }) {
+    getBHAG({ state, commit }) {
       return firebase
         .database()
         .ref("users/" + state.user.user.uid)
         .once("value", snapshot => {
-          commit("setUserRecipes", snapshot.val());
+          commit("setUserBHAG", snapshot.val());
         });
     }
   },

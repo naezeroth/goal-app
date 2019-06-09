@@ -7,7 +7,7 @@
                         <v-toolbar-title>Login Form</v-toolbar-title>
                     </v-toolbar>
                     <v-card-text>
-                        <v-form ref="form" v-model="valid" lazy-validation>
+                        <v-form ref="form" v-model="valid" lazy-validation @submit.prevent="submit">
                             <v-text-field prepend-icon="person" name="email" label="Email" type="email"
                                           v-model="email" :rules="emailRules" required>
                             </v-text-field>

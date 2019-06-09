@@ -1,13 +1,13 @@
 import firebase from "firebase";
 
 var firebaseConfig = {
-  apiKey: "AIzaSyDSsWv0aoySlgZ1ljKmTf7EEgnOFhn31uI",
-  authDomain: "meal-prep-e42f9.firebaseapp.com",
-  databaseURL: "https://meal-prep-e42f9.firebaseio.com",
-  projectId: "meal-prep-e42f9",
-  storageBucket: "meal-prep-e42f9.appspot.com",
-  messagingSenderId: "175411517343",
-  appId: "1:175411517343:web:431d2aabb2ccde3e"
+  apiKey: "AIzaSyBDc5l1CpE7GcAHgctr5vvCH72KNGYslVk",
+  authDomain: "goal-app-e5add.firebaseapp.com",
+  databaseURL: "https://goal-app-e5add.firebaseio.com",
+  projectId: "goal-app-e5add",
+  storageBucket: "goal-app-e5add.appspot.com",
+  messagingSenderId: "935415947810",
+  appId: "1:935415947810:web:e5f50e9f3285a53a"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

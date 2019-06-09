@@ -1,7 +1,6 @@
 <template>
     <span>
-        <v-navigation-drawer app v-model="drawer" class="brown lighten-2" dark disable-resize-watcher temporary>
-            <!-- <v-btn color="teal accent-3">JOIN</v-btn> -->
+        <v-navigation-drawer app v-model="drawer" class="teal accent-2" dark disable-resize-watcher temporary>
             <v-list>
                 <template v-for="(item, index) in items">
                     <v-list-tile :key="index">
@@ -19,7 +18,7 @@
             <router-link to="/">
                 <v-toolbar-title>{{appTitle}}</v-toolbar-title>
             </router-link>
-            <v-btn flat class="hidden-sm-and-down" to="/menu">Menu</v-btn>
+            <!-- <v-btn flat class="hidden-sm-and-down" to="/menu">Menu</v-btn> -->
             <v-spacer class="hidden-sm-and-down"></v-spacer>
             <div v-if="!isAuthenticated" class="hidden-sm-and-down" >
                 <v-btn flat to="/sign-in">SIGN IN</v-btn>
@@ -27,6 +26,7 @@
             </div>
             <div v-else>
                 <v-btn flat to="/about">PROFILE</v-btn>
+                <v-btn flat to="/addGoal">Add Goal</v-btn>
                 <v-btn outline color="white" @click="logout">Logout</v-btn>
             </div>
         </v-toolbar>
@@ -38,10 +38,10 @@ export default {
     name: 'AppNavigation',
     data() {
         return {
-            appTitle: 'Meal Prep',
+            appTitle: 'Memento Vita',
             drawer: false, 
             items: [
-                {title: 'Menu'},
+                // {title: 'Menu'},
                 {title: 'Sign in'},
                 {title: 'Join'}
             ]
@@ -62,7 +62,7 @@ export default {
 
 <style scoped>
 a {
-    color: white;
+    color: black;
     text-decoration: none;
 }
 </style>
