@@ -3,21 +3,17 @@ import Vuex from "vuex";
 import axios from "axios";
 import firebase from "firebase";
 import router from "@/router";
+import { isContext } from "vm";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    // bhag: [],
-    apiUrl: "https://api.edamam.com/search",
     user: null,
     isAuthenticated: false,
-    userBHAG: []
+    userBHAG: [],
   },
   mutations: {
-    setBHAG(state, payload) {
-      state.bhag = payload;
-    },
     setUser(state, payload) {
       state.user = payload;
     },
@@ -26,7 +22,7 @@ export default new Vuex.Store({
     },
     setUserBHAG(state, payload) {
       state.userBHAG = payload;
-    }
+    },
   },
   actions: {
     userJoin({ commit }, { email, password }) {
@@ -73,8 +69,6 @@ export default new Vuex.Store({
         });
     },
     addBHAG({ state }, payload) {
-      console.log(state.user.user.uid);
-      console.log("end test");
       firebase
         .database()
         .ref("users")
@@ -85,7 +79,9 @@ export default new Vuex.Store({
       return firebase
         .database()
         .ref("users/" + state.user.user.uid)
-        .once("value", snapshot => {
+        .on("value", snapshot => {
+          console.log(snapshot);
+          console.log(snapshot.val());
           commit("setUserBHAG", snapshot.val());
         });
     }
@@ -93,6 +89,9 @@ export default new Vuex.Store({
   getters: {
     isAuthenticated(state) {
       return state.user !== null && state.user !== undefined;
+    },
+    getBHAG(state) {
+      return state.userBHAG;
     }
   }
 });
